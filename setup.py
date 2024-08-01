@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="platedet",
-    version="0.0.2",
+    version="0.0.3",
     packages=["platedet"],
     include_package_data=True,
     url="https://github.com/pstwh/platedet",

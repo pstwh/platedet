@@ -165,7 +165,7 @@ class Platedet:
     ) -> Dict[str, Any]:
         return_types = self._normalize_return_types(return_types)
         return self.extract_roi(
-            np.array(image),
+            image,
             conf_threshold=conf_threshold,
             iou_threshold=iou_threshold,
             nm=nm,
@@ -174,12 +174,15 @@ class Platedet:
 
     def inference(
         self,
-        image: np.ndarray,
+        image: Union[np.ndarray, Image.Image],
         conf_threshold: float = 0.6,
         iou_threshold: float = 0.4,
         return_types: List[Union[PlatedetOutputType, str]] = [PlatedetOutputType.PIL],
     ) -> Dict[str, Any]:
         return_types = self._normalize_return_types(return_types)
+        if isinstance(image, Image.Image):
+            image = np.array(image)
+
         return self.prepare_input(
             image,
             conf_threshold=conf_threshold,
